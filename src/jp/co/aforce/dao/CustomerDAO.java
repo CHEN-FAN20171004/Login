@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import jp.co.aforce.beans.Customer;
+import jp.co.aforce.beans.CustomerBean;
 
 public class CustomerDAO extends DAO{
 
-	public Customer search(String login,String password)
+	public CustomerBean search(String login,String password)
 			throws Exception{
 
-		Customer customer=null;
+		CustomerBean customer=null;
 		Connection con=getConnection();
 
 		PreparedStatement st;
@@ -21,11 +21,10 @@ public class CustomerDAO extends DAO{
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
-			customer = new Customer();
-			customer.setId(rs.getInt("id"));
+			customer = new CustomerBean();
+			customer.setId(rs.getString("id"));
 			customer.setLogin(rs.getString("login"));
 			customer.setPassword(rs.getString("password"));
-
 		}
 
 		st.close();
